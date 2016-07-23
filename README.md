@@ -61,3 +61,4 @@ pled1=pledgers.groupby(['Campaign']).Age.mean()
 pled=pled1.add_suffix('_Count').reset_index()
 pled
 
+#Useful information http://pandas.pydata.org/pandas-docs/stable/groupby.html
