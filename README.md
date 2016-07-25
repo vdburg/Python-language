@@ -62,3 +62,27 @@ pled=pled1.add_suffix('_Count').reset_index()
 pled
 
 #Useful information http://pandas.pydata.org/pandas-docs/stable/groupby.html
+
+doc=prueba_tweets() 
+doc.head()
+newdoc=doc['statuses']
+new=newdoc[0]
+doc=doc['statuses'][0].keys()
+type(doc)
+
+help(np.savetxt)
+
+wanted_keys = ['coordinates','created_at','lang','place', 'text','id'] # The keys you want
+twitter_data=dict((k, doc[k]) for k in wanted_keys if k in doc)
+
+docent=doc['entities']
+wanted_keys1 = ['hashtags','expanded_url','land','location','screen_name','text'] # The keys you want
+twitter_data.update(dict((k, docent[k]) for k in wanted_keys1 if k in docent))
+
+docurl=doc['entities']['urls'][0]
+twitter_data.update(dict((k, docurl[k]) for k in wanted_keys1 if k in docurl))
+
+docuer=doc['user']
+twitter_data.update(dict((k, docuer[k]) for k in wanted_keys1 if k in docuer))
+docret=doc['retweeted_status']
+twitter_data.update(dict((k, docret[k]) for k in wanted_keys1 if k in docret))
