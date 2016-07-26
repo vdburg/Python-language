@@ -86,3 +86,13 @@ docuer=doc['user']
 twitter_data.update(dict((k, docuer[k]) for k in wanted_keys1 if k in docuer))
 docret=doc['retweeted_status']
 twitter_data.update(dict((k, docret[k]) for k in wanted_keys1 if k in docret))
+
+#read all files in folder and bend them together:
+    import glob
+Completados=pd.DataFrame()
+frames=[]   
+for i in glob.iglob('UNICEF_LEGADOS_TABLAS*'):
+        data=pd.read_excel(i,  header=4, sheetname=0)
+        frames.append(data)
+Completados=pd.concat(frames) 
+Completados.to_excel('completados3.xlsx', sheet_name='Completan') 
