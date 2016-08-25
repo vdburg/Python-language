@@ -96,3 +96,14 @@ for i in glob.iglob('UNICEF_LEGADOS_TABLAS*'):
         frames.append(data)
 Completados=pd.concat(frames) 
 Completados.to_excel('completados3.xlsx', sheet_name='Completan') 
+
+SQL connection:
+
+import pandas as pd    
+import pyodbc
+cnxn = pyodbc.connect('DSN=CRMSQL;SERVER=UNIPRCRMSQL\CRMSQL;DATABASE=CRMPROD_MSCRM;UID=rvanderburg;PWD=BigData2016')
+cursor = cnxn.cursor()
+
+agre=cursor.execute("select top(1000) qpes_RegisteredCampaignIdName, qpes_agreementdate, qpes_amount, qpes_dischargedate  from qpes_agreement").fetchall()
+agreements=pd.DataFrame(agre)
+agreements
